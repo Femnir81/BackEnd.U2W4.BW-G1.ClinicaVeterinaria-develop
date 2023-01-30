@@ -1,0 +1,129 @@
+﻿@model IEnumerable<ClinicaVeterinaria.Models.Animale>
+
+@{
+    ViewBag.Title = "Lista animali";
+}
+<h2>Lista completa animali</h2>
+    <h4>Attualmente in clinica: @Model.Count()</h4>
+
+    <div class="d-flex align-items-center gap-3" style="color: green">
+        <p>
+            @Html.ActionLink("Crea nuova anagrafica animale", "Create", null, new { @class = "btn", @style = "background-color:#91c493; color:white;" })
+        </p>
+        <p>
+            @Html.ActionLink("Tipologie >", "Index", "TipologiaAnimale", null , new { @class = "btn fw-bold", @style = "background-color: darkgrey; color:white;" })
+        </p>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRegistrazione)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipologiaAnimale.Nome)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ColoreMantello)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.DataNascita)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Microchip)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroMicrochip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NominativoProprietario)
+            </th>
+            
+                <th>
+                    @Html.DisplayNameFor(model => model.Smarrito)
+                </th>
+            @*
+                <th>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataInizioRicovero)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataRegistrazione)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipologiaAnimale.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ColoreMantello)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.DataNascita)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Microchip)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroMicrochip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NominativoProprietario)
+                </td>
+                <td>
+                        @Html.CheckBoxFor(modelItem => item.Smarrito, new { @class = "form-check-input", disabled = true })
+                    </td>
+                @*
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Foto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataInizioRicovero)
+                    </td>*@
+            <td>
+                @Html.ActionLink("Visita", "CreateById", "Visita", new { id = item.ID_Animale }, new { @class = "btn btn-sm", style = "background-color:#c8a2c8;; color:white;" })
+                @Html.ActionLink("Dettagli", "Details", new { id = item.ID_Animale }, new { @class = "btn btn-sm", style = "background-color:cornflowerblue; color:white;" })
+                <button type="button" class="btn btn-sm" style="background-color: gray; color: white;" data-bs-toggle="modal" data-bs-target="@("#delete" + item.ID_Animale)">
+                    X
+                </button>
+                <div class="modal fade" id="@("delete" + item.ID_Animale)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content border border-2 border-danger rounded-2">
+                            <div class="modal-header">
+                                @*<h1 class="modal-title fs-5" id="deleteLabel">Conferma acquisto</h1>*@
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Vuoi cancellare <span class="fw-bold">@item.Nome</span> dalla lista? <br /> <br />
+                                <p>
+                                    Eliminando questa animale, si cancelleranno: <br />                                   
+                                    - Tutte le visite relative a @item.Nome.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    @Html.ActionLink("Sì", "Delete", new { id = item.ID_Animale }, new { @class = "btn btn-sm btn-outline-danger fw-bold", onclick="return confirm('Sicuro sicuro sicurissimo?')" })
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-secondary fw-bold" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*@Html.ActionLink("X", "Delete", new { id = item.ID_Animale }, new { @class = "btn btn-sm", style = "background-color:gray; color:white;" })*@
+            </td>
+            </tr>
+        }
+
+    </table>

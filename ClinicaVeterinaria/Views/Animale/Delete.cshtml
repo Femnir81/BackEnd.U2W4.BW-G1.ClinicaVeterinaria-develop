@@ -1,0 +1,115 @@
+﻿@model ClinicaVeterinaria.Models.Animale
+
+@{
+    ViewBag.Title = "Elimina";
+}
+
+<div class="container">
+    
+
+    <h3>Sei sicuro di voler eliminare questa scheda?</h3>
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TipologiaAnimale.Nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TipologiaAnimale.Nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DataRegistrazione)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataRegistrazione)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ColoreMantello)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ColoreMantello)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DataNascita)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataNascita)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Microchip)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Microchip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NumeroMicrochip)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NumeroMicrochip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NominativoProprietario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NominativoProprietario)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Smarrito)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Smarrito)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Foto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Foto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DataInizioRicovero)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataInizioRicovero)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        @Html.ActionLink("<", "Index", null, new { @class = "btn ", style = "background-color:darkgrey; color:white; position:absolute;" })
+        <input type="submit" value="Elimina" class="btn btn-default" />
+    </div>
+        }
+    </div>
+</div>

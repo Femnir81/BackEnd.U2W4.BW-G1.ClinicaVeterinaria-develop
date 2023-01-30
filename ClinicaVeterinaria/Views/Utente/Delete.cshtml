@@ -1,0 +1,40 @@
+﻿@model ClinicaVeterinaria.Models.Utente
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Elimina utente </h2>
+
+<h3>Sei sicuro di voler eliminare questo utente ?</h3>
+<div>
+   
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Psw)
+        </dt>
+
+        <dd>
+            @Html.HiddenFor(model => model.Psw)
+            ********
+        </dd>
+       
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink("<", "Index", null, new { @class = "btn ", style = "background-color:darkgrey; color:white; position:absolute;" })
+            <input type="submit" value="Elimina" class="btn w-100 btn-danger" /> 
+        </div>
+    }
+</div>

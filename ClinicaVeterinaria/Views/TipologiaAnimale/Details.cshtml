@@ -1,0 +1,28 @@
+﻿@model ClinicaVeterinaria.Models.TipologiaAnimale
+
+@{
+    ViewBag.Title = "Dettagli";
+}
+
+<div class="container">
+    <h2>DETTAGLI SCHEDA</h2>
+
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Modifica", "Edit", new { id = Model.ID_TipologiaAnimale }) |
+        @Html.ActionLink("Ritorna alla lista animali", "Index")
+    </p>
+</div>

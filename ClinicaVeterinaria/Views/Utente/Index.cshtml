@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ClinicaVeterinaria.Models.Utente>
+
+@{
+    ViewBag.Title = "Area Amministrazione";
+}
+
+<h2>Area amministrazione</h2>
+
+<p>
+    @Html.ActionLink("<", "Index", "Animale", null, new { @class = "btn btn-sm", style = "background-color:darkgrey; color:white;" })
+    @Html.ActionLink("Nuovo dipendente", "Create", null, new { @class = "btn btn-sm", style = "background-color:#91c493; color:white;" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Psw)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.HiddenFor(modelItem => item.Psw)
+            ********
+        </td>
+        <td>
+            @Html.ActionLink("Modifica", "Edit", new { id = item.ID_Utente }, new { @class = "btn btn-sm", style = "background-color:cornflowerblue; color:white;" })
+            @Html.ActionLink("X", "Delete", new { id = item.ID_Utente }, new { @class = "btn btn-sm", style = "background-color:gray; color:white;" })
+        </td>
+    </tr>
+}
+
+</table>

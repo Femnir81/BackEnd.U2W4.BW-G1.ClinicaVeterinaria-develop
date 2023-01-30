@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ClinicaVeterinaria.Models.TipologiaAnimale>
+
+@{
+    ViewBag.Title = "Ritrovati";
+}
+<h2>Animali ritrovati in strada.</h2>
+<p> Ci prendiamo cura di loro, aspettando il loro padrone. <br />
+    Appena saranno curati, saranno rispediti al canile piu vicino. <br />
+    </p>
+<div class="d-flex flex-wrap gap-4">
+    @foreach (var item in Model)
+    {
+
+        @Html.HiddenFor(x => item.ID_TipologiaAnimale);
+        <div class="form-check form-switch d-flex align-items-center gap-2">
+            <input class="form-check-input checkbox" type="checkbox" id="@item.Nome">
+            <label class="form-check-label" for="flexSwitchCheckChecked">@item.Nome</label>
+        </div>
+    }
+</div>
+
+    <div id="lista_animali" class=" mt-3 row align-items-start gap-5">
+
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        let idName = $('.checkbox').map(function () { return this.id; }).get();
+        for (let i = 0; i < idName.length; i++) {
+            $("#" + idName[i] + "").change(function () {
+                
+                {
+                    if ($(this).is(':checked')) {
+                        $.ajax({
+                            url: 'AnimaliRitrovati',
+                            method: 'GET',
+                            data: { 'tipologia': this.id },
+                            success: function (animale) {
+                                if (animale == "ERROR") {
+                                    $('#lista_animali').text("Nessun animale trovato in questa clinica")
+                                } else {
+                                    $("." + idName[i]).remove();
+                                    $.each(animale, function (index, val) {
+                                        $('#lista_animali').append(
+                                            "<div class='card text-center " + idName[i] + "' style='width: 300px;'>" +
+                                            "<div class=' " + idName[i] + "'>" +
+                                            (val.Foto != null ? "<img class='img-fluid rounded-3' style='width:250px; height:250px; object-fit:cover;' src='../Content/img/" + val.Foto + "'/>" : "<img class='img-fluid rounded-3' style='width:250px; height:250px; object-fit:cover;' src='../Content/img/no-image.png'/>") +                                         
+                                            '<span class="fs-5 mt-3 " >' + val.Nome + '</span>' + "<br>" +
+                                                   "</div>" +
+                                            "</div>" 
+                                        );
+                                    })
+                                }
+                            }
+                        });
+                    } else {
+                        $("." + idName[i] + "").remove();
+                    }
+                }
+            });
+        }
+    });
+
+
+</script>
